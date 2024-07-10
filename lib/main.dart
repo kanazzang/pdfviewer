@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pdfviewer/pinch.dart';
-import 'package:pdfviewer/simple.dart';
-
-import 'package:universal_platform/universal_platform.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -19,8 +16,6 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.white),
         darkTheme: ThemeData.dark(),
-        home: UniversalPlatform.isWindows
-            ? const SimplePage()
-            : const PinchPage(),
+        home: const PinchPage(),
       );
 }
