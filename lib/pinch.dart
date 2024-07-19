@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
@@ -19,11 +22,18 @@ class _PinchPageState extends State<PinchPage> {
 
   @override
   void initState() {
+    var uri = Uri.dataFromString(
+        html.window.location.href); //converts string to a uri
+    Map<String, String> params =
+        uri.queryParameters; // query parameters automatically populated
+    String? param1 =
+        params['pdf']; // return value of parameter "param1" from uri
+
     _pdfControllerPinch = PdfControllerPinch(
       // document: PdfDocument.openAsset('assets/hello.pdf'),
       document: PdfDocument.openData(
         InternetFile.get(
-          'https://test.yeonts.com/meeting.pdf',
+          (param1 == null) ? 'https://test.yeonts.com/meeting.pdf' : param1,
         ),
       ),
       initialPage: _initialPage,
