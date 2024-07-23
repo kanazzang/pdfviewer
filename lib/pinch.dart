@@ -4,7 +4,6 @@ import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 class PinchPage extends StatefulWidget {
   const PinchPage({super.key});
@@ -17,7 +16,6 @@ enum DocShown { sample, tutorial, hello, password }
 
 class _PinchPageState extends State<PinchPage> {
   static const int _initialPage = 1;
-  DocShown _showing = DocShown.sample;
   late PdfControllerPinch _pdfControllerPinch;
 
   @override
@@ -52,7 +50,7 @@ class _PinchPageState extends State<PinchPage> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text('Pdfx example'),
+        title: const Text('PDF Viewer'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.navigate_before),
@@ -82,34 +80,6 @@ class _PinchPageState extends State<PinchPage> {
               );
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: () {
-              switch (_showing) {
-                case DocShown.sample:
-                case DocShown.tutorial:
-                  _pdfControllerPinch.loadDocument(
-                      PdfDocument.openAsset('assets/flutter_tutorial.pdf'));
-                  _showing = DocShown.hello;
-                  break;
-                case DocShown.hello:
-                  _pdfControllerPinch
-                      .loadDocument(PdfDocument.openAsset('assets/hello.pdf'));
-                  _showing = UniversalPlatform.isWeb
-                      ? DocShown.password
-                      : DocShown.tutorial;
-                  break;
-
-                case DocShown.password:
-                  _pdfControllerPinch.loadDocument(PdfDocument.openAsset(
-                    'assets/password.pdf',
-                    password: 'MyPassword',
-                  ));
-                  _showing = DocShown.tutorial;
-                  break;
-              }
-            },
-          )
         ],
       ),
       body: PdfViewPinch(
