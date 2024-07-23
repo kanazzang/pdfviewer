@@ -50,7 +50,7 @@ class _PinchPageState extends State<PinchPage> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text('PDF Viewer'),
+        title: Image.asset("assets/images/logo_b.png"),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.navigate_before),
