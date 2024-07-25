@@ -2,7 +2,6 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
-import 'package:internet_file/internet_file.dart';
 import 'package:pdfx/pdfx.dart';
 
 class PinchPage extends StatefulWidget {
@@ -29,11 +28,13 @@ class _PinchPageState extends State<PinchPage> {
 
     _pdfControllerPinch = PdfControllerPinch(
       // document: PdfDocument.openAsset('assets/hello.pdf'),
-      document: PdfDocument.openData(
-        InternetFile.get(
-          (param1 == null) ? 'https://test.yeonts.com/meeting.pdf' : param1,
-        ),
-      ),
+      document: PdfDocument.openAsset(
+          param1 == null ? "pdf/spring.pdf" : "pdf/$param1.pdf"),
+      // PdfDocument.openData(
+      //   InternetFile.get(
+      //     (param1 == null) ? 'https://test.yeonts.com/meeting.pdf' : param1,
+      //   ),
+      // ),
       initialPage: _initialPage,
     );
     super.initState();
